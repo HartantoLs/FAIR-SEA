@@ -55,7 +55,9 @@ jobs:
         run: python -m build
 
       - name: Publish package to GitHub Packages
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.GITHUB_TOKEN }}
-          repository_url: https://pypi.pkg.github.com/${{ github.repository }}
+        run: >-
+          twine upload
+          --repository-url https://pypi.pkg.github.com/${{ github.repository_owner }}
+          --username ${{ github.actor }}
+          --password ${{ secrets.GITHUB_TOKEN }}
+          dist/*
