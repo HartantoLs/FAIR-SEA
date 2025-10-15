@@ -32,6 +32,18 @@ pip install -r requirements.txt
 
 5. You are now ready to start developing!
 
+## Guide to set up API key
+1. Obtain the API Key
+
+2. Create a .env File
+In the main root folder of the project (the same level as requirements.txt), create a new file named exactly:
+.env
+
+3. Add the API Key to the File
+Open your new .env file and add the API key you received in the following format:
+    OPENAI_API_KEY="sk-..."
+Replace sk-... with the actual key.
+
 ## Everyday Workflow
 Each time you start working on the project, remember to activate the virtual environment first by navigating to the project folder in your terminal and running the activation command for your OS.
 
