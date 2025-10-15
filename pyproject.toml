@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fairsea"
+version = "0.1.0"
+authors = [
+  { name="IS4246 Group 11", email="contact@example.com" },
+]
+description = "A toolkit for evaluating socio-cultural bias in LLMs for SEA."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
