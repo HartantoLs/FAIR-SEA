@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "FAIR-SEA"
 version = "0.1.0"
 authors = [
-  { name="IS4246 Group 11", email="contact@example.com" },
+  { name="FAIR-SEA", email="test@gmail.com" },
 ]
 description = "A toolkit for evaluating socio-cultural bias in LLMs for SEA."
 readme = "README.md"
