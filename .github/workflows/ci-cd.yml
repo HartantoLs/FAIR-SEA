@@ -58,4 +58,4 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.GITHUB_TOKEN }}
-          repository_url: https://pypi.pkg.github.com/${{ github.repository }}
+          repository_url: https://github.com/HartantoLs/fairsea/packages
