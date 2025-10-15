@@ -3,10 +3,10 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "FAIR-SEA"
+name = "fairsea"
 version = "0.1.0"
 authors = [
-  { name="FAIR-SEA", email="test@gmail.com" },
+  { name="fairsea", email="test@gmail.com" },
 ]
 description = "A toolkit for evaluating socio-cultural bias in LLMs for SEA."
 readme = "README.md"
