@@ -108,31 +108,60 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
   # Job 2: CD - Build and update 'latest' release
-  deploy:
-    name: Build & Update 'Latest' Release
+  # Job 2a: Build and Release for Linux
+  deploy-linux:
+    name: Build & Release for Linux
     needs: build-and-test
     runs-on: ubuntu-latest
-    
     permissions:
       contents: write
-      
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.11' 
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Build the executable with PyInstaller
-        run: pyinstaller --onefile --name fairsea src/fairsea/__main__.py
-
-      - name: Create or Update 'Latest' GitHub Release
-        uses: softprops/action-gh-release@v1
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: pyinstaller --onefile --name fairsea-linux src/fairsea/__main__.py
+      - uses: softprops/action-gh-release@v1
         with:
           tag_name: latest
-          files: dist/fairsea
+          files: dist/fairsea-linux
+
+  # Job 2b: Build and Release for Windows
+  deploy-windows:
+    name: Build & Release for Windows
+    needs: build-and-test
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: pyinstaller --onefile --name fairsea-windows src/fairsea/__main__.py
+      - uses: softprops/action-gh-release@v1
+        with:
+          tag_name: latest
+          files: dist/fairsea-windows.exe
+
+  # Job 2c: Build and Release for macOS (NEW JOB)
+  deploy-macos:
+    name: Build & Release for macOS
+    needs: build-and-test
+    runs-on: macos-latest # <-- This is the key change
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: pyinstaller --onefile --name fairsea-macos src/fairsea/__main__.py
+      - uses: softprops/action-gh-release@v1
+        with:
+          tag_name: latest
+          # This will upload the macOS app to the same release
+          files: dist/fairsea-macos
