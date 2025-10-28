@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "fairsea"
 version = "0.1.0"
 authors = [
-  { name="IS4246 Group 11", email="contact@example.com" },
+  { name="fairsea", email="test@gmail.com" },
 ]
 description = "A toolkit for evaluating socio-cultural bias in LLMs for SEA."
 readme = "README.md"
@@ -16,3 +16,9 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
