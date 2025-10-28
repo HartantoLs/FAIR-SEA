@@ -1,89 +1,14 @@
-# name: Python CI/CD for FAIR-SEA
-
-# on:
-#   push:
-#     branches: [ "main" ]
-
-# jobs:
-#   # Job 1: CI - Test the code for quality
-#   build-and-test:
-#     name: Build & Test
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Check out repository code
-#         uses: actions/checkout@v4
-
-#       - name: Set up Python 3.11
-#         uses: actions/setup-python@v5
-#         with:
-#           python-version: 3.11
-
-#       - name: Install dependencies
-#         run: |
-#           python -m pip install --upgrade pip
-#           pip install -r requirements.txt
-
-#       - name: Lint with flake8
-#         run: flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-
-#       - name: Test with pytest
-#         run: pytest
-#         env:
-#           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
-  # # Job 2: CD - Deploy the package internally
-  # deploy:
-  #   name: Deploy to PyPI
-  #   needs: build-and-test
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: write
-  #     packages: write
-  #   steps:
-  #     - name: Check out repository code
-  #       uses: actions/checkout@v4
-      
-  #     - name: Set up Python
-  #       uses: actions/setup-python@v5
-  #       with:
-  #         python-version: '3.11'
-
-  #     - name: Install build dependencies
-  #       run: pip install build twine
-
-  #     - name: Build package
-  #       run: python -m build
-
-  #     - name: Upload to GitHub Release
-  #       uses: softprops/action-gh-release@v1
-  #       if: startsWith(github.ref, 'refs/tags/')
-  #       with:
-  #         files: dist/*
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  #     - name: Create Package Metadata
-  #       run: |
-  #         echo "Package built successfully" > dist/README.txt
-  #         echo "Version: ${{ github.ref_name }}" >> dist/README.txt
-
-  #     - name: Upload build artifacts
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: python-package-distributions
-  #         path: dist/
-
-
-name: Python CI/CD for FAIR-SEA
+name: Streamlit CI Pipeline
 
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-  # Job 1: CI - Test the code for quality
-  build-and-test:
-    name: Build & Test
+  test-streamlit-app:
+    name: Test Streamlit App Code
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -102,66 +27,9 @@ jobs:
       - name: Lint with flake8
         run: flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-      - name: Test with pytest
+      - name: Test core logic with pytest
         run: pytest
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        # env:
+        #   OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
-  # Job 2: CD - Build and update 'latest' release
-  # Job 2a: Build and Release for Linux
-  deploy-linux:
-    name: Build & Release for Linux
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - run: pip install -r requirements.txt
-      - run: pyinstaller --onefile --name fairsea-linux src/fairsea/__main__.py
-      - uses: softprops/action-gh-release@v1
-        with:
-          tag_name: latest
-          files: dist/fairsea-linux
-
-  # Job 2b: Build and Release for Windows
-  deploy-windows:
-    name: Build & Release for Windows
-    needs: build-and-test
-    runs-on: windows-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - run: pip install -r requirements.txt
-      - run: pyinstaller --onefile --name fairsea-windows src/fairsea/__main__.py
-      - uses: softprops/action-gh-release@v1
-        with:
-          tag_name: latest
-          files: dist/fairsea-windows.exe
-
-  # Job 2c: Build and Release for macOS (NEW JOB)
-  deploy-macos:
-    name: Build & Release for macOS
-    needs: build-and-test
-    runs-on: macos-latest # <-- This is the key change
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - run: pip install -r requirements.txt
-      - run: pyinstaller --onefile --name fairsea-macos src/fairsea/__main__.py
-      - uses: softprops/action-gh-release@v1
-        with:
-          tag_name: latest
-          # This will upload the macOS app to the same release
-          files: dist/fairsea-macos
+        
