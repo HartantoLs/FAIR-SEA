@@ -10,6 +10,7 @@ def main():
     print("=================================================")
     print("This is a standalone application built with PyInstaller.")
     
+    
     # Example usage of a function from your toolkit
     text_to_analyze = "This is an excellent example of a successful project."
     sentiment = analyze_sentiment(text_to_analyze)
