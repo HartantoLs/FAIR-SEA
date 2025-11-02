@@ -983,45 +983,42 @@ elif st.session_state.page == 'about':
         """, unsafe_allow_html=True)
     
     st.markdown("""
-    <div class='glass-container' style='border-left: 4px solid rgba(59, 130, 246, 0.6); padding-left: 3rem;'>
-        <div style='display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;'>
-            <div style='width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(37, 99, 235, 0.2) 100%); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #f8fafc; border: 2px solid rgba(59, 130, 246, 0.5);'>⊕</div>
-            <h2 style='margin: 0; font-size: 2.25rem;'>Framework Overview</h2>
-        </div>
-        
-        <div style='margin: 2.5rem 0;'>
-            <div style='display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;'>
-                <div style='width: 40px; height: 40px; border-radius: 8px; background: rgba(59, 130, 246, 0.2); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: #f8fafc; border: 1px solid rgba(59, 130, 246, 0.4); font-weight: 800;'>1</div>
-                <h3 style='margin: 0; font-size: 1.5rem;'>Scoping & Dataset Curation</h3>
+        <div class='glass-container' style='border-left: 4px solid rgba(59, 130, 246, 0.6); padding-left: 3rem;'>
+            <div style='display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;'>
+                <div style='width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(37, 99, 235, 0.2) 100%); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #f8fafc; border: 2px solid rgba(59, 130, 246, 0.5);'>⊕</div>
+                <h2 style='margin: 0; font-size: 2.25rem;'>Framework Overview</h2>
             </div>
-            <ul style='margin-left: 3.5rem;'>
-                <li><strong>Identify Bias Categories:</strong> Focus on harmful stereotypes relevant to SEA, including stereotypes of Aptitude, Behaviour, and Association.</li>
-                <li><strong>Curate Identity Tokens:</strong> Collect culturally relevant names, ethnicities, and nationalities for Singapore.</li>
-                <li><strong>Design Test Prompts:</strong> Create prompts using multiple techniques to probe for bias across themes like employment, education, and cultural expectations.</li>
-            </ul>
-        </div>
-        
-        <div style='margin: 2.5rem 0;'>
-            <div style='display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;'>
-                <div style='width: 40px; height: 40px; border-radius: 8px; background: rgba(59, 130, 246, 0.2); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: #f8fafc; border: 1px solid rgba(59, 130, 246, 0.4); font-weight: 800;'>2</div>
-                <h3 style='margin: 0; font-size: 1.5rem;'>Model Probing & Response Collection</h3>
+            <div style='margin: 2.5rem 0;'>
+                <div style='display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;'>
+                    <div style='width: 40px; height: 40px; border-radius: 8px; background: rgba(59, 130, 246, 0.2); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: #f8fafc; border: 1px solid rgba(59, 130, 246, 0.4); font-weight: 800;'>1</div>
+                    <h3 style='margin: 0; font-size: 1.5rem;'>Scoping &amp; Dataset Curation</h3>
+                </div>
+                <ul style='margin-left: 3.5rem;'>
+                    <li><strong>Identify Bias Categories:</strong> Focus on harmful stereotypes relevant to SEA, including stereotypes of Aptitude, Behaviour, and Association.</li>
+                    <li><strong>Curate Identity Tokens:</strong> Collect culturally relevant names, ethnicities, and nationalities for Singapore.</li>
+                    <li><strong>Design Test Prompts:</strong> Create prompts using multiple techniques to probe for bias across themes like employment, education, and cultural expectations.</li>
+                </ul>
             </div>
-            <p style='margin-left: 3.5rem; font-size: 1.05rem; line-height: 1.8;'>Designed for automated prompting against target LLMs via APIs, collecting responses systematically with reproducibility as a key principle.</p>
-        </div>
-        
-        <div style='margin: 2.5rem 0;'>
-            <div style='display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;'>
-                <div style='width: 40px; height: 40px; border-radius: 8px; background: rgba(59, 130, 246, 0.2); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: #f8fafc; border: 1px solid rgba(59, 130, 246, 0.4); font-weight: 800;'>3</div>
-                <h3 style='margin: 0; font-size: 1.5rem;'>Bias Evaluation & Scoring</h3>
+            <div style='margin: 2.5rem 0;'>
+                <div style='display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;'>
+                    <div style='width: 40px; height: 40px; border-radius: 8px; background: rgba(59, 130, 246, 0.2); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: #f8fafc; border: 1px solid rgba(59, 130, 246, 0.4); font-weight: 800;'>2</div>
+                    <h3 style='margin: 0; font-size: 1.5rem;'>Model Probing &amp; Response Collection</h3>
+                </div>
+                <p style='margin-left: 3.5rem; font-size: 1.05rem; line-height: 1.8;'>Designed for automated prompting against target LLMs via APIs, collecting responses systematically with reproducibility as a key principle.</p>
             </div>
-            <ul style='margin-left: 3.5rem;'>
-                <li><strong>Quantitative Analysis:</strong> Metrics like consistency scores, likelihood ratios, sentiment/toxicity classification, and embedding similarity. Statistical tests (Chi-square, ANOVA) applied based on prompt type.</li>
-                <li><strong>Qualitative Analysis:</strong> Manual inspection of outputs for nuanced stereotypes or culturally harmful associations.</li>
-                <li><strong>Benchmark Index:</strong> Aggregate scores into a bias index per category.</li>
-            </ul>
+            <div style='margin: 2.5rem 0;'>
+                <div style='display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;'>
+                    <div style='width: 40px; height: 40px; border-radius: 8px; background: rgba(59, 130, 246, 0.2); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: #f8fafc; border: 1px solid rgba(59, 130, 246, 0.4); font-weight: 800;'>3</div>
+                    <h3 style='margin: 0; font-size: 1.5rem;'>Bias Evaluation &amp; Scoring</h3>
+                </div>
+                <ul style='margin-left: 3.5rem;'>
+                    <li><strong>Quantitative Analysis:</strong> Metrics like consistency scores, likelihood ratios, sentiment/toxicity classification, and embedding similarity. Statistical tests (Chi-square, ANOVA) applied based on prompt type.</li>
+                    <li><strong>Qualitative Analysis:</strong> Manual inspection of outputs for nuanced stereotypes or culturally harmful associations.</li>
+                    <li><strong>Benchmark Index:</strong> Aggregate scores into a bias index per category.</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
     
     st.markdown("""
     <div class='glass-container' style='border-left: 4px solid rgba(59, 130, 246, 0.6); padding-left: 3rem;'>
