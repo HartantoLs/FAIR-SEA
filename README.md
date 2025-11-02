@@ -74,5 +74,3 @@ Once the environment is set up and activated (`(venv)` appears in your terminal)
 
 ```bash
 streamlit run app.py
-
-#####
