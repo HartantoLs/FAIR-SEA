@@ -124,7 +124,7 @@ def plot_heatmap(ct_pct, title=None, cmap="coolwarm", figsize=None):
         cbar.ax.tick_params(labelsize=max(8, annot_fs))
 
     plt.tight_layout()
-
+    plt.close(fig)
     return fig
 
 def plot_overlapping_hist(df, value_col, category_col, kde=True, alpha=0.5, figsize=(3, 2), palette=None):
@@ -248,6 +248,7 @@ def plot_model_vs_gt(ct_model_pct, ct_gt_pct, title_prefix="Model vs Ground Trut
 
     plt.suptitle(suptitle)
     plt.tight_layout(rect=[0, 0, 1, 0.95])
+    plt.close(fig)
     return fig
 
 
@@ -333,6 +334,7 @@ def plot_difference_heatmap(ct_model_pct, ct_gt_pct, title=None, cmap="vlag"):
         pass
 
     plt.tight_layout()
+    plt.close(fig)
     return fig
 # -----------------------------------------------------
 # Wrapper Functions
