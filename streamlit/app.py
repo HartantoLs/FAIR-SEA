@@ -988,7 +988,7 @@ elif st.session_state.page == 'about':
         <div class='info-card'>
             <div style='width: 56px; height: 56px; border-radius: 12px; background: linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(37, 99, 235, 0.15) 100%); display: flex; align-items: center; justify-content: center; font-size: 1.75rem; color: #f8fafc; border: 2px solid rgba(59, 130, 246, 0.4); margin-bottom: 1.5rem;'>◈</div>
             <h3>Bias Reporting</h3>
-            <p>Comprehensive reporting mechanism offering both quantitative and qualitative insights through this dashboard.</p>
+            <p>Comprehensive reporting mechanism offering both quantitative and qualitative insights from analysis through this dashboard.</p>
         </div>
         """, unsafe_allow_html=True)
     
