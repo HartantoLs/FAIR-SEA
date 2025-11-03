@@ -885,7 +885,7 @@ if st.session_state.page == 'home':
                         </svg>
                     </div>
                     <div class='cta-title'>Learn About FAIR-SEA</div>
-                    <div class='cta-description'>Understand the framework, methodology, and validation approach</div>
+                    <div class='cta-description'>Understand the framework, methodology, and validation and analysis approach</div>
                 </div>
             </div>
         </div>
@@ -925,7 +925,7 @@ if st.session_state.page == 'home':
         st.markdown("""
         <div class='info-card'>
             <h3>Impact</h3>
-            <p>Transform manual bias assessments into data-driven, reproducible evaluations for fairer AI deployment in diverse societies.</p>
+            <p>Transform manual bias assessments into data-driven, reproducible evaluations for fairer AI deployment in diverse societies especially in SEA.</p>
         </div>
         """, unsafe_allow_html=True)
 
