@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from bias_metrics import *
 import os
+import importlib
 
 # Page configuration
 st.set_page_config(
@@ -798,6 +799,30 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
+
+def load_csv_file(file_path):
+    """Load CSV file with proper resource management using context manager."""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            df = pd.read_csv(f)
+        return df
+    except Exception as e:
+        st.error(f"Error loading CSV file: {str(e)}")
+        return None
+
+def get_processing_module(domain):
+    """
+    Dynamically load processing module using importlib with proper resource handling.
+    This prevents file descriptor exhaustion compared to __import__.
+    """
+    try:
+        module_name = f"{domain.lower()}_processing"
+        module = importlib.import_module(module_name)
+        return module
+    except ModuleNotFoundError:
+        st.warning(f"Processing module '{module_name}' not found.")
+        return None
+
 # HOME PAGE
 if st.session_state.page == 'home':
     st.markdown("""
@@ -1103,10 +1128,11 @@ elif st.session_state.page == 'dashboard':
         demo_path = "data/consolidated_prompts.csv"
         if os.path.exists(demo_path):
             try:
-                df = pd.read_csv(demo_path)
-                df["llm_output"] = df["llm_output"].apply(clean_output)
-                st.session_state.df = df
-                st.success(f"Demo data loaded successfully ({len(df)} rows)")
+                df = load_csv_file(demo_path)
+                if df is not None:
+                    df["llm_output"] = df["llm_output"].apply(clean_output)
+                    st.session_state.df = df
+                    st.success(f"Demo data loaded successfully ({len(df)} rows)")
             except Exception as e:
                 st.error(f"Error loading demo data: {str(e)}")
         else:
@@ -1165,18 +1191,17 @@ elif st.session_state.page == 'dashboard':
                 if func_name in globals() and callable(globals()[func_name]):
                     outputs = globals()[func_name](df)
                 else:
-                    module_name = f"{domain.lower()}_processing"
-                    try:
-                        mod = __import__(module_name)
-                    except ModuleNotFoundError:
-                        st.warning(f"No processing module found for {domain} (expected {module_name}.py).")
+                    module = get_processing_module(domain)
+                    
+                    if module is None:
+                        st.error(f"Could not load processing module for {domain}.")
                         st.stop()
                     
-                    if not hasattr(mod, func_name) or not callable(getattr(mod, func_name)):
-                        st.warning(f"Module {module_name} does not define {func_name}().")
+                    if not hasattr(module, func_name) or not callable(getattr(module, func_name)):
+                        st.warning(f"Function '{func_name}' not found in processing module.")
                         st.stop()
                     
-                    process_func = getattr(mod, func_name)
+                    process_func = getattr(module, func_name)
                     outputs = process_func(df)
             
             st.markdown("""
