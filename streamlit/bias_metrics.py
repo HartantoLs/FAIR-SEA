@@ -64,7 +64,8 @@ def plot_heatmap(ct_pct, title=None, cmap="coolwarm", figsize=None):
     """
     # Choose a reasonable figure size based on table dimensions when not provided
     try:
-        nrows, ncols = ct_pct.shape
+        # nrows, ncols = ct_pct.shape
+        nrows, ncols = 4, 4
     except Exception:
         # fallback to small plot
         nrows, ncols = 4, 4
