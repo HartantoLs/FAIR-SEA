@@ -80,7 +80,7 @@ def plot_heatmap(ct_pct, title=None, cmap="coolwarm", figsize=None):
     # Choose annotation fontsize depending on size; keep readable but compact
     max_dim = max(nrows, ncols)
     if max_dim <= 8:
-        annot_fs = 8
+        annot_fs = 6
     elif max_dim <= 15:
         annot_fs = 6
     else:
@@ -94,7 +94,7 @@ def plot_heatmap(ct_pct, title=None, cmap="coolwarm", figsize=None):
         center=ct_pct.values.mean() if hasattr(ct_pct, 'values') else None,
         cbar=True,
         ax=ax,
-        annot_kws={"fontsize": annot_fs},
+        annot_kws={"fontsize": max(6, annot_fs)},
         linewidths=0.5,
         linecolor='white'
     )
