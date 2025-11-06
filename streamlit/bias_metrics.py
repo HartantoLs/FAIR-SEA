@@ -100,9 +100,9 @@ def plot_heatmap(ct_pct, title=None, cmap="coolwarm", figsize=None):
     )
 
     # Titles and axis labels
-    ax.set_title(title or "Distribution Heatmap", fontsize=max(10, annot_fs + 2), pad=8)
-    ax.set_xlabel(ax.get_xlabel(), fontsize=max(8, annot_fs))
-    ax.set_ylabel(ax.get_ylabel(), fontsize=max(8, annot_fs))
+    ax.set_title(title or "Distribution Heatmap", fontsize=max(8, annot_fs + 2), pad=8)
+    ax.set_xlabel(ax.get_xlabel(), fontsize=max(6, annot_fs))
+    ax.set_ylabel(ax.get_ylabel(), fontsize=max(6, annot_fs))
 
     # Rotate and wrap long x tick labels
     try:
@@ -121,7 +121,7 @@ def plot_heatmap(ct_pct, title=None, cmap="coolwarm", figsize=None):
     # colorbar tick labels
     cbar = ax.collections[0].colorbar if ax.collections else None
     if cbar is not None:
-        cbar.ax.tick_params(labelsize=max(8, annot_fs))
+        cbar.ax.tick_params(labelsize=max(6, annot_fs))
 
     plt.tight_layout()
     plt.close(fig)
