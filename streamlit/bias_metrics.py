@@ -246,84 +246,84 @@ def plot_model_vs_gt(ct_model_pct, ct_gt_pct, title_prefix="Model vs Ground Trut
     return fig
 
 
-def plot_difference_heatmap(ct_model_pct, ct_gt_pct, title=None, cmap="vlag"):
-    """
-    Plot a single heatmap of (model - ground-truth) row-normalized tables.
-    Returns a Matplotlib figure.
-    """
-    # Align columns and rows
-    all_cols = sorted(set(ct_model_pct.columns).union(set(ct_gt_pct.columns)))
-    all_idx = sorted(set(ct_model_pct.index).union(set(ct_gt_pct.index)))
+# def plot_difference_heatmap(ct_model_pct, ct_gt_pct, title=None, cmap="vlag"):
+#     """
+#     Plot a single heatmap of (model - ground-truth) row-normalized tables.
+#     Returns a Matplotlib figure.
+#     """
+#     # Align columns and rows
+#     all_cols = sorted(set(ct_model_pct.columns).union(set(ct_gt_pct.columns)))
+#     all_idx = sorted(set(ct_model_pct.index).union(set(ct_gt_pct.index)))
 
-    m = ct_model_pct.reindex(index=all_idx, columns=all_cols, fill_value=0)
-    g = ct_gt_pct.reindex(index=all_idx, columns=all_cols, fill_value=0)
+#     m = ct_model_pct.reindex(index=all_idx, columns=all_cols, fill_value=0)
+#     g = ct_gt_pct.reindex(index=all_idx, columns=all_cols, fill_value=0)
 
-    # Ensure both tables are row-normalized to represent P(category | group)
-    try:
-        m = _safe_normalize(m.astype(float))
-    except Exception:
-        m = _safe_normalize(m)
-    try:
-        g = _safe_normalize(g.astype(float))
-    except Exception:
-        g = _safe_normalize(g)
+#     # Ensure both tables are row-normalized to represent P(category | group)
+#     try:
+#         m = _safe_normalize(m.astype(float))
+#     except Exception:
+#         m = _safe_normalize(m)
+#     try:
+#         g = _safe_normalize(g.astype(float))
+#     except Exception:
+#         g = _safe_normalize(g)
 
-    diff = m - g
+#     diff = m - g
 
-    # sizing: use same dynamic sizing and annotation font logic as plot_heatmap
-    try:
-        nrows, ncols = diff.shape
-    except Exception:
-        nrows, ncols = 4, 4
+#     # sizing: use same dynamic sizing and annotation font logic as plot_heatmap
+#     try:
+#         nrows, ncols = diff.shape
+#     except Exception:
+#         nrows, ncols = 4, 4
 
-    # default figsize scales with table dimensions (same heuristic as plot_heatmap)
-    width = max(4, 0.7 * ncols)
-    height = max(3, 0.45 * nrows)
-    fig, ax = plt.subplots(figsize=(width, height))
+#     # default figsize scales with table dimensions (same heuristic as plot_heatmap)
+#     width = max(4, 0.7 * ncols)
+#     height = max(3, 0.45 * nrows)
+#     fig, ax = plt.subplots(figsize=(width, height))
 
-    # Choose annotation fontsize depending on size; keep readable but compact
-    annot_fs = 6
+#     # Choose annotation fontsize depending on size; keep readable but compact
+#     annot_fs = 6
 
-    # decide whether to annotate cells (only for reasonably small tables)
-    annotate = (ncols <= 12 and nrows <= 30)
-    vmax = max(abs(diff.values.min()), abs(diff.values.max()))
+#     # decide whether to annotate cells (only for reasonably small tables)
+#     annotate = (ncols <= 12 and nrows <= 30)
+#     vmax = max(abs(diff.values.min()), abs(diff.values.max()))
 
-    sns.heatmap(
-        diff,
-        annot=annotate,
-        fmt=".2f",
-        cmap=cmap,
-        center=0,
-        vmin=-vmax,
-        vmax=vmax,
-        ax=ax,
-        linewidths=0.3,
-        annot_kws={"fontsize": annot_fs} if annotate else None,
-    )
+#     sns.heatmap(
+#         diff,
+#         annot=annotate,
+#         fmt=".2f",
+#         cmap=cmap,
+#         center=0,
+#         vmin=-vmax,
+#         vmax=vmax,
+#         ax=ax,
+#         linewidths=0.3,
+#         annot_kws={"fontsize": annot_fs} if annotate else None,
+#     )
 
-    ax.set_title(title or "Model − Ground Truth", fontsize=max(10, annot_fs + 2))
+#     ax.set_title(title or "Model − Ground Truth", fontsize=max(10, annot_fs + 2))
 
-    # wrap x labels
-    try:
-        xticks = [t.get_text() for t in ax.get_xticklabels()]
-        import textwrap
-        wrapped = ["\n".join(textwrap.wrap(t, width=12)) for t in xticks]
-        if ncols > 18:
-            rot = 90
-            ha = 'center'
-        elif ncols > 12:
-            rot = 75
-            ha = 'right'
-        else:
-            rot = 45
-            ha = 'right'
-        ax.set_xticklabels(wrapped, rotation=rot, ha=ha)
-    except Exception:
-        pass
+#     # wrap x labels
+#     try:
+#         xticks = [t.get_text() for t in ax.get_xticklabels()]
+#         import textwrap
+#         wrapped = ["\n".join(textwrap.wrap(t, width=12)) for t in xticks]
+#         if ncols > 18:
+#             rot = 90
+#             ha = 'center'
+#         elif ncols > 12:
+#             rot = 75
+#             ha = 'right'
+#         else:
+#             rot = 45
+#             ha = 'right'
+#         ax.set_xticklabels(wrapped, rotation=rot, ha=ha)
+#     except Exception:
+#         pass
 
-    plt.tight_layout()
-    plt.close(fig)
-    return fig
+#     plt.tight_layout()
+#     plt.close(fig)
+#     return fig
 # -----------------------------------------------------
 # Wrapper Functions
 # -----------------------------------------------------
