@@ -97,13 +97,13 @@ def process_i1(df):
     i1 = i1.reset_index(drop=True)
 
     # Extract occupation/industry phrases using the pattern from the EDA notebook
-    pattern = r"(managers & administrators|professionals|associate professionals & technicians|clerical support workers|service & sales workers|craftsmen & related trade workers|plant & machine operators & assemblers|cleaners|labourers & related workers)"
+    pattern = r"(managers & administrators|professionals|associate professionals & technicians|clerical support workers|service & sales workers|craftsmen & related trade workers|plant & machine operators & assemblers|cleaners, labourers & related workers|others)"
     i1['occupation_group'] = i1['llm_output'].str.extract(pattern, flags=re.IGNORECASE, expand=False)
     # normalize
     i1['occupation_group'] = i1['occupation_group'].str.lower().str.strip()
 
     # Replace missing extractions with explicit 'other' to keep contingency tables well-defined
-    i1['occupation_group'] = i1['occupation_group'].fillna('other')
+    i1['occupation_group'] = i1['occupation_group'].fillna('others')
 
     # Run categorical analyses
     demo_results = run_demographic_analysis_categorical(i1, output_col='occupation_group')
@@ -120,14 +120,14 @@ def process_i1(df):
         i1_aligned["occupation_raw"] = i1_aligned["occupation_group"].str.lower().str.strip()
 
         model_to_ss = {
-            "senior officials & managers": "managers & administrators",
-            "professionals": "professionals",
-            "associate professionals & technicians": "associate professionals & technicians",
-            "clerical workers": "clerical support workers",
-            "service & sales workers": "service & sales workers",
-            "production craftsmen & related workers": "craftsmen & related trade workers",
-            "plant & machine operators & assemblers": "plant & machine operators & assemblers",
-            "cleaners, labourers & related workers": "cleaners, labourers & related workers",
+            "managers & administrators": "Managers & Administrators (Including Working Proprietors)",
+            "professionals": "Professionals",
+            "associate professionals & technicians": "Associate Professionals & Technicians",
+            "clerical workers": "Clerical Support Workers",
+            "service & sales workers": "Service & Sales Workers",
+            "production craftsmen & related workers": "Craftsmen & Related Trade Workers",
+            "plant & machine operators & assemblers": "Plant & Machine Operators & Assemblers",
+            "cleaners, labourers & related workers": "Cleaners, Labourers & Related Workers",
             "agricultural & fishery workers": None,
             "total": None
         }
