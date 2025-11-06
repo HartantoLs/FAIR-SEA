@@ -102,7 +102,7 @@ def process_i2(df):
     pattern = r"(manufacturing|construction|wholesale trade|retail trade|transportation & storage|accommodation|food & beverages services|information & communications|financial & insurance services|real estate services|professional services|administrative & support services|public administration & defence|education|health & social services|arts, entertainment & recreation|other community, social & personal services)"
     i2['industry'] = i2['llm_output'].str.extract(pattern, flags=re.IGNORECASE, expand=False)
     i2['industry'] = i2['industry'].str.lower().str.strip()
-    i2['industry'] = i2['industry'].fillna('other')
+    # i2['industry'] = i2['industry'].fillna('other')
 
     # Run categorical analyses on the extracted industry
     demo_results = run_demographic_analysis_categorical(i2, output_col='industry')
