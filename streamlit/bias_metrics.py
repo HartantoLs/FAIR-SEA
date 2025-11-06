@@ -78,13 +78,7 @@ def plot_heatmap(ct_pct, title=None, cmap="coolwarm", figsize=None):
     fig, ax = plt.subplots(figsize=figsize)
 
     # Choose annotation fontsize depending on size; keep readable but compact
-    max_dim = max(nrows, ncols)
-    if max_dim <= 8:
-        annot_fs = 6
-    elif max_dim <= 15:
-        annot_fs = 6
-    else:
-        annot_fs = 6
+    annot_fs = 6
 
     sns.heatmap(
         ct_pct,
@@ -288,13 +282,7 @@ def plot_difference_heatmap(ct_model_pct, ct_gt_pct, title=None, cmap="vlag"):
     fig, ax = plt.subplots(figsize=(width, height))
 
     # Choose annotation fontsize depending on size; keep readable but compact
-    max_dim = max(nrows, ncols)
-    if max_dim <= 8:
-        annot_fs = 10
-    elif max_dim <= 15:
-        annot_fs = 8
-    else:
-        annot_fs = 6
+    annot_fs = 6
 
     # decide whether to annotate cells (only for reasonably small tables)
     annotate = (ncols <= 12 and nrows <= 30)
