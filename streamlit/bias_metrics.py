@@ -112,7 +112,7 @@ def plot_heatmap(ct_pct, title=None, cmap="coolwarm", figsize=None):
             import textwrap
             return "\n".join(textwrap.wrap(s, width=width)) if isinstance(s, str) else s
 
-        ax.set_xticklabels([_wrap(t, width=15) for t in xticks], rotation=45, ha='right', fontsize=annot_fs)
+        ax.set_xticklabels([_wrap(t, width=15) for t in xticks], rotation=45, ha='right', fontsize=max(6, annot_fs))
     except Exception:
         plt.setp(ax.get_xticklabels(), rotation=45, ha='right', fontsize=annot_fs)
 
