@@ -64,8 +64,7 @@ def plot_heatmap(ct_pct, title=None, cmap="coolwarm", figsize=None):
     """
     # Choose a reasonable figure size based on table dimensions when not provided
     try:
-        # nrows, ncols = ct_pct.shape
-        nrows, ncols = 4, 4
+        nrows, ncols = ct_pct.shape
     except Exception:
         # fallback to small plot
         nrows, ncols = 4, 4
@@ -81,9 +80,9 @@ def plot_heatmap(ct_pct, title=None, cmap="coolwarm", figsize=None):
     # Choose annotation fontsize depending on size; keep readable but compact
     max_dim = max(nrows, ncols)
     if max_dim <= 8:
-        annot_fs = 10
-    elif max_dim <= 15:
         annot_fs = 8
+    elif max_dim <= 15:
+        annot_fs = 6
     else:
         annot_fs = 6
 
