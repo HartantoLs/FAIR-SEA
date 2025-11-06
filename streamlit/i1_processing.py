@@ -120,7 +120,7 @@ def process_i1(df):
         i1_aligned["occupation_raw"] = i1_aligned["occupation_group"].str.lower().str.strip()
 
         model_to_ss = {
-            "managers & administrators": "Managers & Administrators (Including Working Proprietors)",
+            "managers & administrators": "Managers & Administrators",
             "professionals": "Professionals",
             "associate professionals & technicians": "Associate Professionals & Technicians",
             "clerical workers": "Clerical Support Workers",
