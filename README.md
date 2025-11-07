@@ -237,8 +237,17 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-**4. Run the Dashboard:**
+**4. Run the Automated Scripting Script:**
 ```bash
+cd prompts
+```
+Upload Prompts.xlsx to `prompts` folder.
+Input `OPENAI_API_KEY` in `consolidated_prompts.ipynb` and run the Jupyter notebook.
+The resulting data file will be saved in the folder `data`.
+
+**5. Run the Dashboard:**
+```bash
+cd streamlit
 streamlit run app.py
 ```
 
