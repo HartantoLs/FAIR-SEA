@@ -241,9 +241,9 @@ pip install -r requirements.txt
 ```bash
 cd prompts
 ```
-Upload Prompts.xlsx to `prompts` folder.
-Input `OPENAI_API_KEY` in `consolidated_prompts.ipynb` and run the Jupyter notebook.
-The resulting data file will be saved in the folder `data`.
+- Upload Prompts.xlsx to `prompts` folder.
+- Input `OPENAI_API_KEY` in `consolidated_prompts.ipynb` and run the Jupyter notebook.
+- The resulting data file will be saved in the folder `data`.
 
 **5. Run the Dashboard:**
 ```bash
